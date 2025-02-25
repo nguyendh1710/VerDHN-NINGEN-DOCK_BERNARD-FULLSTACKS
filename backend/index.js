@@ -1,40 +1,71 @@
 // ✅ Nạp biến môi trường từ .env
 require("dotenv").config();
 
-// ✅ Import các thư viện
+// ✅ Import các thư viện bằng require()
 const mongoose = require("mongoose");
 const express = require("express");
 const cors = require("cors");
-
+const rateLimit = require("express-rate-limit");
 // ✅ Khởi tạo server
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5000; // Dùng PORT của Vercel hoặc 5000 khi chạy local
 
-// ✅ Cấu hình CORS đúng cách
-const corsOptions = {
-  origin: "https://ver-dhn-ningen-dock-bernard-fullstacks-1do4.vercel.app",
-  methods: "GET,POST,PUT,DELETE,OPTIONS",
-  allowedHeaders: "Content-Type,Authorization",
-  credentials: true,
+// ✅ Middleware
+
+const allowedOrigins = [
+  "https://ver-dhn-ningen-dock-bernard-fullstacks-1do4.vercel.app",
+  "https://another-frontend.vercel.app",
+  "http://127.0.0.1:5500",  // Thêm vào đây
+  "http://localhost:5500"   // Thêm vào nếu bạn dùng localhost thay vì 127.0.0.1
+];
+// ✅ Cho phép tất cả domain (nếu muốn mở rộng API công khai)
+// app.use(cors());
+
+// ✅ Chỉ cho phép frontend từ Vercel gọi API (bảo mật hơn)
+app.use(cors({
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("CORS policy doesn't allow this origin!"));
+    }
+  },
+  methods: "GET,POST,PUT,DELETE",
+  allowedHeaders: "Content-Type,Authorization"
+}));
+
+app.use(express.json()); // Thay thế bodyParser.json()
+
+//------------------------- Tạo các  middleware
+//------------------------- Tạo các  middleware giới hạn số lần gửi form => chống spam bot
+const formLimiter = async (req, res, next) => {
+  try {
+    const { email } = req.body;
+    if (!email) {
+      return res.status(400).json({ message: "Email là bắt buộc" });
+    }
+
+    const recentSubmission = await Information.findOne({
+      email,
+      createdAt: { $gte: new Date(Date.now() - 15 * 60 * 1000) }, // Kiểm tra trong 15 phút gần đây
+    });
+
+    if (recentSubmission) {
+      return res.status(429).json({ message: "Bạn đã gửi quá nhiều lần! Vui lòng thử lại sau 15 phút." });
+    }
+
+    next(); // ✅ Phải gọi next() nếu hợp lệ
+  } catch (error) {
+    console.error("Lỗi kiểm tra spam:", error);
+    res.status(500).json({ message: "Lỗi server khi kiểm tra spam" });
+  }
 };
-app.use(cors(corsOptions));
 
-// ✅ Xử lý preflight request để tránh lỗi CORS
-app.options("*", cors(corsOptions));
 
-// ✅ Middleware xử lý JSON
-app.use(express.json());
 
-// ✅ Middleware custom thêm headers CORS nếu cần
-app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "https://ver-dhn-ningen-dock-bernard-fullstacks-1do4.vercel.app");
-  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-  res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
-  res.header("Access-Control-Allow-Credentials", "true"); // ✅ Quan trọng nếu gửi cookies
-  next();
-});
 
-// --------------- Kết nối MongoDB ---------------
+
+// --------------- Kết nối MongoDB Atlas ---------------
 mongoose
   .connect(process.env.MONGO_URI, {
     useNewUrlParser: true,
@@ -44,43 +75,50 @@ mongoose
   .then(() => console.log("✅ MongoDB đã kết nối"))
   .catch((err) => console.error("❌ Lỗi kết nối MongoDB:", err));
 
-// Định nghĩa Schema
+// --------------- Định nghĩa Schema ---------------
 const InformationSchema = new mongoose.Schema({
   name: { type: String, required: true },
-  email: { type: String, required: true, unique: true },
-  tel: { type: String, required: true, unique: true },
+  email: { type: String, required: true, unique: true }, // ✅ Unique
+  tel: { type: String, required: true, unique: true },   // ✅ Unique
   createdAt: { type: Date, default: Date.now },
 });
+// ✅ Đặt index trước khi tạo model
+InformationSchema.index({ email: 1, tel: 1 }, { unique: true });
 
 const Information = mongoose.model("Information", InformationSchema, "informations");
 
-// --------------- Các Route API ---------------
+// ---------------Các Route API CRUD  ---------------
+
 
 // ✅ Route API lấy danh sách khách hàng
 app.get("/api/informations", async (req, res) => {
   try {
-    const data = await Information.find();
-    res.status(200).json(data);
+    const data = await Information.find(); // Truy vấn toàn bộ dữ liệu
+    res.status(200).json(data); // Gửi dữ liệu về client
   } catch (error) {
     res.status(500).json({ message: "Server error", error });
   }
 });
 
 // ✅ Route API thêm khách hàng
-app.post("/api/informations", async (req, res) => {
+app.post("/api/informations", formLimiter, async (req, res) => {
   let { name, email, tel } = req.body;
   
   if (!name || !email || !tel) {
-    return res.status(400).json({ message: "Thiếu thông tin bắt buộc" });
+    return res.status(400).json({ message: "Thiếu thông tin bắt buộc: name, email, tel" });
   }
 
-  try {
-    email = email.trim().toLowerCase();
-    tel = tel.trim();
+  // Chuẩn hóa dữ liệu
+  email = email.trim().toLowerCase();
+  tel = tel.trim();
 
-    const newCustomer = new Information({ name, email, tel, createdAt: new Date() });
+  try {
+    console.log("🔍 Kiểm tra khách hàng với email:", email, "hoặc số điện thoại:", tel);
+
+    const newCustomer = new Information({ name, email, tel, createdAt: new Date() }); // ✅ Cập nhật thời gian chính xác
     await newCustomer.save();
 
+    console.log("✅ Đã lưu vào MongoDB:", newCustomer);
     res.status(201).json({ message: "Thêm khách hàng thành công", customer: newCustomer });
   } catch (error) {
     if (error.code === 11000) {
@@ -90,11 +128,31 @@ app.post("/api/informations", async (req, res) => {
   }
 });
 
+
+
+// ✅ --------------------Khởi động server
+app.listen(PORT, () => {
+  console.log(`🚀 Server running on http://localhost:${PORT}`);
+});
+//---------------- các mã kiểm tra--------------------------
+// ✅ Kiểm tra biến môi trường đã load chưa
+console.log("📧 Email:", process.env.EMAIL_SENDER);
+console.log("🔑 Password:", process.env.EMAIL_PASSWORD ? "Loaded" : "Not Loaded");
+// ✅ Route kiểm tra kết nối MongoDB
+app.get("/api/test-mongo", async (req, res) => {
+  try {
+    const isConnected = mongoose.connection.readyState === 1;
+    res.json({ success: isConnected, message: isConnected ? "MongoDB Connected" : "MongoDB Not Connected" });
+  } catch (error) {
+    res.status(500).json({ success: false, error: error.message });
+  }
+});
+// ✅ Thêm route `/api/health` để kiểm tra server
+app.get("/api/health", (req, res) => {
+  res.json({ status: "OK", message: "🚀 Server is running smoothly" });
+});
+
 // ✅ Route kiểm tra Backend đang chạy
 app.get("/", (req, res) => {
   res.send("✅ Backend đang hoạt động tốt!!");
 });
-
-// ✅ Khởi động server
-module.exports = app;
-

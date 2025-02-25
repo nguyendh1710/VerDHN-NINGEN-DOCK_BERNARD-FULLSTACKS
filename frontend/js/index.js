@@ -39,7 +39,7 @@
 const getCustomer = async () => {
   try {
     // Không cần truyền data cho GET request
-    const response = await axios.get("https://ver-dhn-ningen-dock-bernard-fullstacks.vercel.app/api/informations"); 
+    const response = await axios.get("http://localhost:5000/api/informations"); 
 
     console.log("✅ Get Customer success:", response.data);
   } catch (error) {
@@ -52,7 +52,7 @@ const postCustomer = async (data) => {
   const nameCustomer = document.getElementById("name").value;
   try {
     // Gửi thông tin lên backend
-    const response = await axios.post("https://ver-dhn-ningen-dock-bernard-fullstacks.vercel.app/api/informations", data);
+    const response = await axios.post("http://localhost:5000/api/informations", data);
     
     console.log("✅ Post Customer success:", response.data);
 
