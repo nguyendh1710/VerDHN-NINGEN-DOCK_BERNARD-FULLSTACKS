@@ -1,19 +1,29 @@
 // ✅ Nạp biến môi trường từ .env
 require("dotenv").config();
 
-// ✅ Import các thư viện bằng require()
+// ✅ /-------------------------Import các thư viện bằng require()
 const mongoose = require("mongoose");
 const express = require("express");
 const cors = require("cors");
 const rateLimit = require("express-rate-limit");
-// ✅ Khởi tạo server
-const app = express();
-const PORT = process.env.PORT || 5000; // Dùng PORT của Vercel hoặc 5000 khi chạy local
 
+
+
+//------------------------- Tạo các  middleware
 // ✅ Middleware
-app.use(cors({ origin: "*" }));// Cho phép tất cả domain gọi API
+// ✅ Cho phép tất cả domain (nếu muốn mở rộng API công khai)
+// app.use(cors());
+
+// ✅ Chỉ cho phép frontend từ Vercel gọi API (bảo mật hơn)
+app.use(cors({
+  origin: "https://ver-dhn-ningen-dock-bernard-fullstacks-1do4.vercel.app/",
+  methods: "GET,POST,PUT,DELETE",
+  allowedHeaders: "Content-Type,Authorization"
+}));
 app.use(express.json()); // Thay thế bodyParser.json()
-// Tạo middleware giới hạn số lần gửi form => chống spam bot
+
+
+//middleware giới hạn số lần gửi form => chống spam bot
 const formLimiter = async (req, res, next) => {
   try {
     const { email } = req.body;
@@ -39,11 +49,11 @@ const formLimiter = async (req, res, next) => {
 
 
 
-// ✅ Kiểm tra biến môi trường đã load chưa
-console.log("📧 Email:", process.env.EMAIL_SENDER);
-console.log("🔑 Password:", process.env.EMAIL_PASSWORD ? "Loaded" : "Not Loaded");
 
-// --------------- Kết nối MongoDB Atlas ---------------
+
+
+
+// --------------- Kết nối vào MongoDB Atlas ---------------
 mongoose
   .connect(process.env.MONGO_URI, {
     useNewUrlParser: true,
@@ -52,8 +62,8 @@ mongoose
   })
   .then(() => console.log("✅ MongoDB đã kết nối"))
   .catch((err) => console.error("❌ Lỗi kết nối MongoDB:", err));
-
-// --------------- Định nghĩa Schema ---------------
+  
+// Định nghĩa Schema  cho collection trên Mongo Atlas---------------
 const InformationSchema = new mongoose.Schema({
   name: { type: String, required: true },
   email: { type: String, required: true, unique: true }, // ✅ Unique
@@ -64,17 +74,8 @@ const InformationSchema = new mongoose.Schema({
 InformationSchema.index({ email: 1, tel: 1 }, { unique: true });
 
 const Information = mongoose.model("Information", InformationSchema, "informations");
+// ---------------Các Route API CRUD  ---------------
 
-
-// ✅ Route kiểm tra kết nối MongoDB
-app.get("/api/test-mongo", async (req, res) => {
-  try {
-    const isConnected = mongoose.connection.readyState === 1;
-    res.json({ success: isConnected, message: isConnected ? "MongoDB Connected" : "MongoDB Not Connected" });
-  } catch (error) {
-    res.status(500).json({ success: false, error: error.message });
-  }
-});
 
 // ✅ Route API lấy danh sách khách hàng
 app.get("/api/informations", async (req, res) => {
@@ -115,14 +116,31 @@ app.post("/api/informations", formLimiter, async (req, res) => {
 });
 
 
+
+// ✅ --------------------Khởi động server---------------------------
+// ✅ Khởi tạo server
+const app = express();
+const PORT = process.env.PORT || 5000; // Dùng PORT của Vercel hoặc 5000 khi chạy local
+// chạy server
+app.listen(PORT, () => {
+  console.log(`🚀 Server running on http://localhost:${PORT}`);
+});
+//---------------- các mã kiểm tra--------------------------
+// ✅ Kiểm tra biến môi trường đã load chưa
+console.log("📧 Email:", process.env.EMAIL_SENDER);
+console.log("🔑 Password:", process.env.EMAIL_PASSWORD ? "Loaded" : "Not Loaded");
+// ✅ Route kiểm tra kết nối MongoDB
+app.get("/api/test-mongo", async (req, res) => {
+  try {
+    const isConnected = mongoose.connection.readyState === 1;
+    res.json({ success: isConnected, message: isConnected ? "MongoDB Connected" : "MongoDB Not Connected" });
+  } catch (error) {
+    res.status(500).json({ success: false, error: error.message });
+  }
+});
 // ✅ Thêm route `/api/health` để kiểm tra server
 app.get("/api/health", (req, res) => {
   res.json({ status: "OK", message: "🚀 Server is running smoothly" });
-});
-
-// ✅ Khởi động server
-app.listen(PORT, () => {
-  console.log(`🚀 Server running on http://localhost:${PORT}`);
 });
 
 // ✅ Route kiểm tra Backend đang chạy
