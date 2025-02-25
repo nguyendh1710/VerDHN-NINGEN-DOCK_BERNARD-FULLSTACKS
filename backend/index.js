@@ -6,13 +6,16 @@ const mongoose = require("mongoose");
 const express = require("express");
 const cors = require("cors");
 const rateLimit = require("express-rate-limit");
-app.use(express.json()); // khởi tạo app Thay thế bodyParser.json()
+
+// ✅ Khởi tạo server trước khi sử dụng middleware
+const app = express();
+const PORT = process.env.PORT || 5000; // Dùng PORT của Vercel hoặc 5000 khi chạy local
 
 
 //------------------------- Tạo các  middleware
 // ✅ Middleware
 // ✅ Cho phép tất cả domain (nếu muốn mở rộng API công khai)
-// app.use(cors());
+  app.use(cors());
 
 // ✅ Chỉ cho phép frontend từ Vercel gọi API (bảo mật hơn)
 app.use(cors({
@@ -118,9 +121,7 @@ app.post("/api/informations", formLimiter, async (req, res) => {
 
 
 // ✅ --------------------Khởi động server---------------------------
-// ✅ Khởi tạo server
-const app = express();
-const PORT = process.env.PORT || 5000; // Dùng PORT của Vercel hoặc 5000 khi chạy local
+
 // chạy server
 app.listen(PORT, () => {
   console.log(`🚀 Server running on http://localhost:${PORT}`);
