@@ -1,0 +1,48 @@
+.swal {
+    &__popup {
+      border-radius: 10px;
+      width: 400px;
+      box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+    }
+  
+    &--success {
+      background-color: $secondary-1-lighter !important; // Màu nền xanh nhạt cho success
+      color: #2d862d !important; // Màu chữ
+    }
+  
+    &--error {
+      background-color: $secondary-1-lighter !important; // Màu nền đỏ nhạt cho error
+      color: $accent-default !important; // Màu chữ
+    }
+  
+    &__title {
+      font-size: 24px;
+      font-weight: bold;
+    }
+  
+    &--success-title {
+      color: #1e7e34 !important;
+    }
+  
+    &--error-title {
+      color: #b71c1c !important;
+    }
+  
+    &__confirm-btn {
+      font-size: 16px !important;
+      padding: 10px 20px !important;
+      border-radius: 5px;
+      font-weight: bold;
+    }
+  
+    &--success-btn {
+      background-color: #28a745 !important;
+      color: white !important;
+    }
+  
+    &--error-btn {
+      background-color: #d33 !important;
+      color: white !important;
+    }
+  }
+  

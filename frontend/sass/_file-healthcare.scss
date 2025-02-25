@@ -1,0 +1,218 @@
+.bgfile-healthcare {
+  background: rgba(203, 235, 244, 0.959);
+  position: relative; /* Đảm bảo để có thể sử dụng pseudo-element */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  max-width: 100%;
+  height: auto; 
+  @include media-breakpoint-down(md) {
+          
+    height: 360vh;
+  }
+  @include media-breakpoint-down(sm) {
+          
+    height: 390vh;
+  }
+  /* Lớp phủ màu blue nhẹ */
+  &::before {
+    //   filter: blur(2px);
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  
+    background-image: url("./../images/canh-hoa.png");
+    background-color: rgba(
+      243,
+      249,
+      250,
+      0.968
+    ); /* Blue nhẹ với độ trong suốt */
+    z-index: 1; /* Đảm bảo lớp phủ ở trên nền */
+  }
+
+  /* Nội dung thực tế nằm trên lớp phủ */
+  & > * {
+    position: relative; /* Đảm bảo các phần tử con hiển thị ở trên lớp phủ */
+    z-index: 2;
+  }
+
+  .file-healthcare {
+    height: auto;
+    width: 1170px;
+    max-width: 100%;
+    padding: 32px 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-self: stretch;
+    gap: 24px;
+
+    &__title {
+      text-align: center;
+      margin-bottom: 24px;
+      @include typography(
+        $primary-default,
+        $font-weight-bold,
+        $font-size-28,
+        $line-height-percent-120
+      );
+      span {
+        @include typography(
+          $accent-default,
+          $font-weight-bold,
+          $font-size-28,
+          $line-height-percent-120
+        );
+      }
+    }
+    &__content {
+      display: flex;
+      width: 970px;
+      max-width: 100%;
+      height: auto;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 84px;
+      // Styles for large screens (lg)
+      @include media-breakpoint-down(lg) {
+        display: flex;
+flex-wrap: wrap;
+align-content: space-around;
+        flex-direction: column;
+      }
+           // Styles for large screens (sm)
+           @include media-breakpoint-down(lg) {
+            gap: 104px;
+          }
+         
+      &__item {
+        width: 80%;
+        max-width: 100%;
+        height: 232px;
+      
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        align-items: flex-start;
+        gap: var(--Number-40-px, 10px);
+        align-self: stretch;
+        @include media-breakpoint-down(lg) {
+          width: 60%;
+          height: auto;
+          flex-direction: column;
+          display: flex;
+          flex-wrap: wrap;
+          align-content: space-around;
+          gap: var(--Number-40-px, 30px);
+        }
+        @include media-breakpoint-down(md) {
+          
+          gap:12vh;
+        }
+
+        @include media-breakpoint-down(sm) {
+          
+          gap:20vh;
+        }
+
+        &__left {
+          width: 445px;
+          max-width: 100%;
+          height: 100%;
+          &__leftimg {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            @include media-breakpoint-down(lg) {
+                max-width: 100%;
+                height: 200px;
+                object-fit: cover;
+                object-position: center;
+            }
+            @include media-breakpoint-down(md) {
+              max-width: 90%;
+              height: 200px;
+              object-fit: cover;
+              object-position: center;
+          }
+          @include media-breakpoint-down(sm) {
+            max-width: 90%;
+            height: 200px;
+            object-fit: cover;
+            object-position: center;
+        }
+            border-radius: var(--Number-32-px, 32px);
+            border: 1px solid var(--Color-Secondary---1-Light, #c0aa79);
+            background: url(<path-to-image>) lightgray 50% / cover no-repeat;
+            @include box-shadow-xs();
+          }
+        }
+
+        &__line {
+          width: 1px; /* Đặt chiều rộng của đường */
+          height: 219px; /* Xóa chiều cao (chỉ giữ chiều rộng) */
+          background-color: #000; /* Màu đường */
+          border: none; /* Xóa border mặc định */
+          margin-bottom: 20px; /* Xóa khoảng cách trên và dưới */
+          padding: 0; /* Xóa padding mặc định */
+          background-color: $secondary-gradient-2;
+          @include media-breakpoint-down(lg) {
+            
+            display: none;
+         
+          }
+        }
+        &__right {
+          display: flex;
+          width: 445px;
+          max-width: 100%;
+          height: 120px;
+          flex-direction: column;
+          justify-content: center;
+          &__title{
+
+            @include typography(
+              $primary-default,
+              $font-weight-bold,
+              $font-size-18,
+              $line-height-percent-150
+            );
+            @include media-breakpoint-down(sm) {
+            
+              @include typography(
+                $primary-default,
+                $font-weight-bold,
+                $font-size-16,
+                $line-height-percent-150
+              );
+          }
+          
+          }
+          &__text{
+            @include typography(
+              $primary-default,
+              $font-weight-normal,
+              $font-size-16,
+              $line-height-percent-150
+            );
+            @include media-breakpoint-down(sm) {
+            
+              @include typography(
+                $primary-default,
+                $font-weight-normal,
+                $font-size-14,
+                $line-height-percent-150
+              );
+          }
+          
+          }
+        }
+      }
+    }
+  }
+}

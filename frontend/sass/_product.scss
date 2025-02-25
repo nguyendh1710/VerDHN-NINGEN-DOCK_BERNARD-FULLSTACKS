@@ -1,0 +1,135 @@
+.bgproduct {
+  max-height: 576px;
+  background-image: url("./../images/artboard.jpg");
+  background-size: cover; // Đảm bảo ảnh nền luôn phủ đầy khu vực
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative; // Để làm cha cho overlay và nội dung
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,  // Đổi hướng từ phải sang trái
+      rgba(0, 0, 0, 0.711) 0%, 
+      rgba(0, 0, 0, 0.644) 20%, 
+      rgba(238, 233, 233, 0.5) 50%, // Màu sáng tập trung giữa
+      rgba(0, 0, 0, 0.707) 80%, 
+      rgba(0, 0, 0, 0.651) 100%
+    );
+    z-index: 1; // Overlay nằm dưới nội dung
+  }
+
+  // Responsive styles
+  @include media-breakpoint-down(lg) {
+    min-height: 80%;
+    background-size: cover; // Đảm bảo ảnh nền phủ đầy màn hình
+  }
+
+  @include media-breakpoint-down(md) {
+    min-height: 80%;
+    background-size: cover; // Đảm bảo ảnh nền phủ đầy màn hình
+  }
+
+  @include media-breakpoint-down(md) {
+    min-height: 40%;
+    background-size: cover; // Đảm bảo ảnh nền phủ đầy màn hình
+  }
+  .product {
+    height: auto;
+    width: 1170px;
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    &__title {
+      text-align: center;
+      position: relative; // Thêm position relative để nhận z-index
+      z-index: 5;
+      padding: 24px 32px;
+      gap: 32px;
+      
+      @include typography(
+        $primary-default,
+        $font-weight-bold,
+        $font-size-28,
+        $line-height-percent-120
+      );
+      
+      span {
+        @include typography(
+          $secondary-1-default,
+          $font-weight-bold,
+          $font-size-28,
+          $line-height-percent-120
+        );
+      }
+    }
+
+    &__image {
+      width: 100%;
+      height: 80%;
+      margin: 0 auto;
+      position: relative; // Thêm position relative để nhận z-index
+      z-index: 5; // Đặt cao hơn tất cả để nằm trên cùng
+      transform: translateY(-20%); 
+    }
+    
+    &__cta {
+      font-size: $font-size-18;
+      display: block;
+      width: 22%;
+      height: 56px;
+      display: flex;
+      padding: 16px 32px;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      margin: 0 auto;
+      transform: translateY(-360%); // Đảm bảo căn giữa theo trục ngang
+      z-index: 5; // Đảm bảo CTA nằm trên các phần tử khác
+      @include media-breakpoint-down(xl) {
+        transform: translateY(-300%);
+        width: 28%;
+      }
+      @include media-breakpoint-down(lg) {
+        transform: translateY(-200%);
+        width: 32%;
+      }
+      @include media-breakpoint-down(md) {
+        transform: translateY(-100%);
+        width: 52%;
+      }
+      @include media-breakpoint-down(sm) {
+        transform: translateY(-50%);
+        width: 82%;
+      }
+      // Styles __cta cho màn hình lớn và nhỏ
+      button {
+        width: 100%;
+        border-radius: $radius-32;
+        background: $secondary-gradient-3;
+        color: $background-default;
+        @include box-shadow-xs();
+        text-align: center;
+        @include typography(
+          $background-default,
+          $font-weight-bold,
+          $font-size-16,
+          $line-height-percent-150
+        );
+        // Hover effect - đổi màu chữ sang xanh
+        &:hover {
+          color: $secondary-1-light; // Màu xanh Bootstrap
+          transition: color 0.3s ease-in-out;
+        }
+      }
+    }
+  }
+}

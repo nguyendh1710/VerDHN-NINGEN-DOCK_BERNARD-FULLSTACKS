@@ -1,0 +1,26 @@
+@import "./variables";
+// chứa cấu hình toàn cục của landing page
+
+
+// body
+body{
+  // kich thước màn hình tổng 1440px đó là kích thước màn hình tổng để responsive chứ wrapper không phải là kích thước màn hình mà chỉ là khối mình quy định
+  // không đặt cứng min-width 1440px ở đây vì nó không thể co dãn theo nội dung khi responsive
+  // min-width: 1440px;
+  font-family: $font-family-default;
+  font-style: $font-style-default; 
+  // trang sẽ cuộn mượt
+  scroll-behavior: smooth;
+
+}
+// kich thước màn hình bao đã tính bỏ padding 2 bên
+.wrapper{
+  // width: 1170px;
+  // margin: 0px auto;
+  max-width: 1170px;  // Giới hạn tối đa 1170px thay vì cố định -> giúp co dãn theo nội dung khi responsive
+  width: 100%;        // Giúp co giãn theo màn hình nhỏ hơn -> giúp co dãn theo nội dung khi responsive
+  margin: 0 auto;
+  // padding: 0 15px;   // giúp tránh sát mép màn hình nhỏ
+  // hạn chế dùng overflow: hidden; này để tránh mất nội dung -> cách này chỉ để che lỗi chủ yếu tìm phần tử gây tràn mà xử lý
+  // overflow: hidden;
+}

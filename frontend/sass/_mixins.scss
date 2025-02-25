@@ -1,0 +1,17 @@
+@import "./variables";
+
+
+// Mixin để tạo TYPOGRAPHY
+@mixin typography($color, $font-weight, $font-size, $line-height-percent) {
+  color: $color;
+  font-family: $font-family-default;
+  font-weight: $font-weight;
+  font-size: $font-size ;
+  line-height: $line-height-percent;
+}
+// Mixin để tạo EFFECTS
+// box-shadow
+@mixin box-shadow-xs() {
+    box-shadow: $shadow-xs;
+  }
+// dùng Mixin RESPONSIVE của Bootstrap nên không cần phải viết

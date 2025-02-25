@@ -1,0 +1,435 @@
+.bgexpert {
+  position: relative;
+  max-width: 100%;
+  height: 210vh; // Đảm bảo nền luôn phủ kín toàn bộ viewport
+  background-image: url("./../images/artboard4.png");
+
+  background-size: cover !important; // Đảm bảo nền không bị thu nhỏ
+  background-position: center;
+  background-repeat: no-repeat;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      rgba(238, 233, 233, 0.955) 0%,
+      rgba(213, 210, 210, 0.929) 20%,
+      rgba(238, 233, 233, 0.955) 50%,
+      rgba(238, 233, 233, 0.955) 80%,
+      rgba(238, 233, 233, 0.955) 100%
+    );
+    z-index: 1; // Overlay nằm dưới nội dung
+  }
+
+  // Responsive styles
+  @include media-breakpoint-down(xxl) {
+   height: 246vh;
+   
+  }
+  @include media-breakpoint-down(xl) {
+    height: 246vh;
+   
+  }
+  @include media-breakpoint-down(lg) {
+   height: 210vh;
+ 
+  }
+
+  @include media-breakpoint-down(md) {
+    height: 200vh;
+  }
+
+  @include media-breakpoint-down(sm) {
+     height: 200vh;
+  }
+
+  .expert {
+    height: auto;
+    width: 1170px;
+    max-width: 100%;
+    padding: 32px 24px;
+    gap: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    &__title {
+      width: 90%;
+
+      justify-content: center;
+      align-items: center;
+      gap: 16px;
+      display: inline-flex;
+      position: relative;
+      z-index: 3;
+      @include typography(
+        $primary-default,
+        $font-weight-bold,
+        $font-size-28,
+        $line-height-percent-120
+      );
+      &__icon {
+        width: 4%;
+        height: 4%;
+      }
+      &__text {
+        text-align: center;
+        @include typography(
+          #697e8e,
+          $font-weight-bold,
+          $font-size-24,
+          $line-height-percent-120
+        );
+        word-wrap: break-word;
+        span {
+          @include typography(
+            $accent-default,
+            $font-weight-bold,
+            $font-size-24,
+            $line-height-percent-120
+          );
+        }
+      }
+      &__line {
+        flex: 1 1 300px; // Tăng giá trị min-width để đảm bảo không quá ngắn
+        height: 2px; // Đổi từ 0px thành 2px để dễ nhìn thấy
+        border: none; // Xóa border và thay bằng background để dễ kiểm soát
+        background-color: #697e8e; // Màu sắc giữ nguyên như border cũ
+        max-width: 400px; // Giới hạn chiều dài tối đa để tránh kéo dài quá mức trên màn hình lớn
+        @include media-breakpoint-down(lg) {
+          display: none;
+        }
+      }
+    }
+    &__boxtext {
+      width: 70%;
+
+      &__text {
+        position: relative;
+        z-index: 3;
+        text-align: center;
+        @include typography(
+          $primary-default,
+          $font-weight-medium,
+          $font-size-16,
+          $line-height-percent-150
+        );
+      }
+    }
+    &__list {
+      position: relative;
+      z-index: 3;
+      width: 60%;
+      height: 60%;
+      @include media-breakpoint-down(md) {
+        width: 60%;
+        height: 60%;
+      }
+      @include media-breakpoint-down(sm) {
+        width: 80%;
+        height: 80%;
+      }
+    }
+    &__carousel {
+      height: 70vh;
+      @include media-breakpoint-down(xl) {
+        margin-left: 10%;
+      }
+      @include media-breakpoint-down(lg) {
+        height: 90vh;
+      }
+
+      @include media-breakpoint-down(md) {
+        height: 70vh;
+        margin-left: 2%;
+      }
+      @include media-breakpoint-down(sm) {
+        height: 80vh;
+      }
+      .doctor-card {
+        max-width: 90%;
+        height: 80%;
+
+        border-radius: 16px;
+        border: 1px solid #062844;
+        background: #eef1f0;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        padding: 15px;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        z-index: 3;
+        background: linear-gradient(
+          to bottom,
+          #ffffff 0%,
+          #e4e0e0 40%,
+          #33333383 80%,
+          #000000 100%
+        );
+
+        @include media-breakpoint-down(lg) {
+          margin: 0 auto;
+          width: 70%;
+          height: 90%;
+        }
+
+        @include media-breakpoint-down(md) {
+          margin: 0 auto;
+          width: 70%;
+          height: 70%;
+        }
+        @include media-breakpoint-down(sm) {
+          margin: 0 auto;
+          width: 70%;
+          height: 90%;
+     
+        }
+        &__title {
+          @include typography(
+            $primary-dark,
+            $font-weight-bold,
+            $font-size-16,
+            $line-height-percent-150
+          );
+
+          align-self: flex-start;
+        }
+        &__view-more-link {
+          @include typography(
+            $primary-default,
+            $font-weight-medium,
+            $font-size-16,
+            $line-height-percent-150
+          );
+
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          text-decoration: none;
+          position: relative;
+
+          &::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #c0aa79;
+            transition: width 0.3s ease;
+          }
+          &:hover::after {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            width: 100%;
+          }
+        }
+
+        &__boxinfo {
+          height: 100%;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between; // Chỉnh sửa để các phần có thể phân chia không gian đều nhau
+          width: 100%;
+          transform: translateX(12%) translateY(4%);
+     
+          // Thêm hiệu ứng zoom khi hover vào thẻ .doctor-card
+          transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+        
+         
+          @include media-breakpoint-down(lg) {
+            width: 80%;
+            height: 80%;
+            margin-top: 8%;
+            transform: translateY(12%) translateX(12%);
+          }
+          @include media-breakpoint-down(md) {
+            width: 80%;
+            height: 90%;
+            margin-top: 8%;
+            transform: translateY(12%) translateX(12%);
+          }
+          @include media-breakpoint-down(sm) {
+            width: 100%;
+            height: 100%;
+            margin-bottom: -44%;
+            transform: translateY(2%) translateX(12%);
+          }
+
+          &__image {
+            // Đảm bảo căn giữa và không thay đổi tỷ lệ ảnh
+
+            flex-shrink: 0;
+            object-fit: cover; // Đảm bảo hình ảnh bao phủ không gian mà không bị biến dạng
+            display: block; // Căn giữa các hình ảnh theo chiều ngang
+            width: 100%; // Chiếm toàn bộ chiều rộng
+            height: 80%;
+            transition: all 0.4s ease-out; // Mượt mà khi hover
+            will-change: transform, filter;
+            &:hover {
+              transform: translateX(1%) translateY(-4%) scale(1.1); // Phóng to mà không bị lệch;; // Phóng to toàn bộ card
+              filter: drop-shadow(0px 10px 30px rgba(246, 241, 225, 0.879)); // Hiệu ứng sáng nhẹ
+            }
+            @include media-breakpoint-down(lg) {
+              width: 100%; // Chiếm toàn bộ chiều rộng
+              max-height: 60%; // Giới hạn chiều cao hình ảnh
+              transform: translateX(24%);
+            }
+
+            @include media-breakpoint-down(md) {
+              width: 100%; // Chiếm toàn bộ chiều rộng
+              max-height: 60%; // Giới hạn chiều cao hình ảnh
+              transform: translateX(24%);
+            }
+
+            @include media-breakpoint-down(sm) {
+              width: 100%; // Chiếm toàn bộ chiều rộng
+              max-height: 60%; // Giới hạn chiều cao hình ảnh
+              transform: translateX(6%);
+            }
+          }
+
+          &__info {
+     
+            display: flex;
+            flex-direction: column;
+            justify-content: center; // Căn giữa nội dung theo chiều dọc
+            background: #f3f3f3;
+            padding: 8px;
+            border-radius: 8px;
+            border: 1px solid #05243d;
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+            height: 20%;
+            width: 70%;
+            text-align: center;
+            align-items: center;
+            @include media-breakpoint-down(xl) {
+              padding: 20% 20%;
+              width: 100%;
+              height: 20%;
+              transform: translateX(-14%);
+            }
+            @include media-breakpoint-down(lg) {
+              padding: 10% 10%;
+              width: 100%;
+              height: 40%;
+              transform: translateX(-2%);
+            }
+            @include media-breakpoint-down(md) {
+              padding: 20% 20%;
+              width: 100%;
+              height: 20%;
+              transform: translateX(-2%);
+            }
+            
+            @include media-breakpoint-down(sm) {
+              padding: 10% 10%;
+              width: 100%;
+              height: 70%;
+              transform: translateX(-14%);
+            }
+
+            // Đảm bảo title và name được căn đều theo chiều dọc
+            &__title {
+              @include typography(
+                $primary-dark,
+                $font-weight-bold,
+                $font-size-14,
+                $line-height-percent-150
+              );
+            }
+
+            &__name {
+              @include typography(
+                $secondary-1-dark,
+                $font-weight-bold,
+                $font-size-14,
+                $line-height-percent-150
+              );
+            }
+          }
+        }
+      }
+    }
+
+    .carousel-control-prev {
+      left: -8%; /* Đẩy nút Prev ra xa hơn 10% so với carousel */
+      bottom: 30%;
+      max-width: 5%;
+      filter: invert(70%) sepia(78%) saturate(200%) hue-rotate(180deg);
+      @include media-breakpoint-down(xxl) {
+        bottom: 28%;
+        left: -4%;
+        max-width: 4%;
+      }
+      @include media-breakpoint-down(xl) {
+        bottom: 28%;
+        left: -4%;
+      }
+      @include media-breakpoint-down(lg) {
+        bottom: 68%;
+      }
+      @include media-breakpoint-down(md) {
+        bottom: 68%;
+      }
+    }
+
+    .carousel-control-next {
+      max-width: 5%;
+      bottom: 30%;
+      right: -3%; /* Đẩy nút Next ra xa hơn 10% so với carousel */
+      filter: invert(70%) sepia(78%) saturate(200%) hue-rotate(180deg);
+      @include media-breakpoint-down(xl) {
+        bottom: 28%;
+      }
+      @include media-breakpoint-down(lg) {
+        bottom: 68%;
+      }
+      @include media-breakpoint-down(md) {
+        bottom: 68%;
+      }
+    }
+    /* Đẩy indicators xuống dưới carousel */
+    .carousel-indicators {
+      top: 100%; /* Đẩy indicators xuống dưới 100% */
+      @include media-breakpoint-down(xxl) {
+        top: 120%;
+      }
+      @include media-breakpoint-down(xl) {
+        top: 120%;
+      }
+      @include media-breakpoint-down(lg) {
+        top: 80%;
+      }
+      @include media-breakpoint-down(md) {
+        top: 100%;
+      }
+      @include media-breakpoint-down(sm) {
+        top: 100%;
+      }
+    }
+
+    /* Đổi màu indicators */
+    .carousel-indicators button {
+      background-color: $secondary-gradient-3;
+      width: 12px; /* Kích thước vòng tròn */
+      height: 12px;
+      border-radius: 50%; /* Làm tròn indicators */
+      opacity: 0.7; /* Giảm độ trong suốt */
+    }
+
+    /* Khi indicator được chọn */
+    .carousel-indicators .active {
+      background-color: $secondary-1-dark;
+      opacity: 1;
+    }
+  }
+}

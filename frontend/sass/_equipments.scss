@@ -1,0 +1,463 @@
+.bgequipment {
+  position: relative;
+  height: 170vh;
+  max-width: 100%;
+  // height: auto; // Đảm bảo nền luôn phủ kín toàn bộ viewport
+  background-image: url("./../images/bg-4.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  @include media-breakpoint-down(xxl) {
+    height: 200vh;
+  }
+  @include media-breakpoint-down(xl) {
+    height: 210vh;
+  }
+  @include media-breakpoint-down(lg) {
+     height: 140vh;
+  }
+  @include media-breakpoint-down(md) {
+     height: 140vh;
+  }
+  @include media-breakpoint-down(sm) {
+     height: 140vh;
+  }
+  .equipment {
+    height: auto;
+    width: 1170px;
+    max-width: 100%;
+    padding: 32px 24px;
+    gap: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    &__title {
+      width: 90%;
+      justify-content: center;
+      align-items: center;
+      gap: 16px;
+      display: inline-flex;
+      position: relative;
+      z-index: 3;
+      &__text {
+        @include typography(
+          $primary-default,
+          $font-weight-bold,
+          $font-size-28,
+          $line-height-percent-120
+        );
+      }
+    }
+
+    #carouselequipments {
+      max-height: 190vh;
+      max-width: 100%;
+      display: flex;
+      justify-content: center;
+      @include media-breakpoint-down(xl) {
+        max-width: 80%;
+      
+      }
+      @include media-breakpoint-down(lg) {
+        max-width: 80%;
+      }
+      @include media-breakpoint-down(md) {
+        max-width: 90%;
+      }
+      @include media-breakpoint-down(sm) {
+        max-width: 80%;
+      }
+      .carousel-inner {
+        max-width: 100%;
+        height: auto;
+        @include media-breakpoint-down(xl) {
+          width: 100%;
+      
+        }
+        @include media-breakpoint-down(lg) {
+          width: 70%;
+        }
+        @include media-breakpoint-down(md) {
+          width: 70%;
+        }
+        @include media-breakpoint-down(sm) {
+          width: 100%;
+        }
+        .subcontent {
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+          align-items: center;
+          @include media-breakpoint-down(xl) {
+            width: 100%;
+            // margin-left: 10%;
+          }
+          &__text {
+            @include typography(
+              $secondary-1-default,
+              $font-weight-bold,
+              $font-size-20,
+              $line-height-percent-120
+            );
+          }
+
+          &__button {
+            font-size: $font-size-18;
+            display: block;
+            width: auto;
+            height: 26%;
+            display: flex;
+            padding: 16px 32px;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            // Styles __cta cho màn hình   (xl) - desktop trở xuống
+            @include media-breakpoint-down(xl) {
+              width: 26%;
+            }
+            // Styles __cta cho màn hình   (lg) - tablet trở xuống
+            @include media-breakpoint-down(lg) {
+              display: none;
+              width: 42%;
+            }
+            // Styles __cta cho màn hình lơn  - desktop trở xuống
+            button {
+              width: 100%;
+              border-radius: $radius-32;
+              background: $background-default;
+
+              @include box-shadow-xs();
+              text-align: center;
+              @include typography(
+                $primary-default,
+                $font-weight-bold,
+                $font-size-16,
+                $line-height-percent-150
+              );
+              // Hover effect - đổi màu chữ sang xanh
+              &:hover {
+                color: $primary-darkest; // Màu xanh Bootstrap
+                transition: color 0.3s ease-in-out;
+              }
+            }
+          }
+        }
+        .boxcard {
+          height: 30%;
+          width: 100%;
+          gap: 1%;
+          // margin: 0 auto phải có này nó mới bay ra giữa chứ không nó không ăn
+          margin: 0 auto;
+          @include media-breakpoint-down(xl) {
+      
+            width: 100%;
+          }
+          &__left {
+            display: flex;
+            width: 48%;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 24px; // Khoảng cách giữa các phần tử trong card
+            border-radius: 16px;
+            border: 2px solid $primary-default; // Màu dark border
+            background: rgba(255, 255, 255, 0.8); // Nền trong suốt nhẹ
+            box-shadow: 0px 8px 0px 0px #343a32; // Đổ bóng cho card
+            
+            &__content {
+              display: flex;
+              flex-direction: column;
+              align-items: flex-start;
+              gap: 24px;
+              &__title {
+                text-align: left;
+                @include typography(
+                  $primary-default,
+                  $font-weight-bold,
+                  $font-size-18,
+                  $line-height-percent-150
+                );
+                @include media-breakpoint-down(sm) {
+                  font-size:$font-size-16 ;
+                }
+                &__accent {
+                  color: $accent-default;
+                }
+              }
+              &__text {
+                text-align: left;
+                @include typography(
+                  $primary-default,
+                  $font-weight-medium,
+                  $font-size-16,
+                  $line-height-percent-150
+                );
+                @include media-breakpoint-down(sm) {
+                  font-size:$font-size-14 ;
+                }
+              }
+              &__link {
+                width: 26%;
+              
+          
+                text-decoration: none;
+                @include typography(
+                  $primary-default,
+                  $font-weight-medium,
+                  $font-size-16,
+                  $line-height-percent-150
+                );
+                @include media-breakpoint-down(sm) {
+                  font-size:$font-size-14 ;
+                }
+                text-align: left;
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                gap: 1%;
+                span {
+                  width: 60%;
+                  @include media-breakpoint-down(xl) {
+                    width: 70%;
+                  }
+                  @include media-breakpoint-down(sm) {
+                    width: 300px;
+                  }
+                }
+              }
+            }
+            &__image {
+              object-fit: cover;
+              width: 100%;
+              height: 50%;
+              border-top-left-radius: 16px;
+              border-top-right-radius: 16px;
+            }
+            @include media-breakpoint-down(xl) {
+              width: 40%;
+             
+            }
+            @include media-breakpoint-down(lg) {
+              width: 100%;
+            }
+      
+            @include media-breakpoint-down(md) {
+              width: 100%;
+              height: 100vh;
+            }
+            @include media-breakpoint-down(sm) {
+              width: 100%;
+           
+            }
+          }
+          &__right {
+            width: 48%;
+            border-radius: 16px;
+            height: 32%; 
+            @include media-breakpoint-down(xl) {
+              width: 64%;
+              height: 30%;
+            }
+            &__card {
+             
+              @include media-breakpoint-down(xl) {
+                width: 90%;
+                height: 32%;
+              }
+            
+            
+              display: flex;
+              flex-direction: row;
+              justify-content: flex-start;
+              align-items: stretch;
+              margin-bottom: 3%;
+              border: 2px solid $primary-default; // Định nghĩa viền chung
+              border-bottom: 4px solid $primary-default; // Làm viền dưới dày hơn
+              &:last-child {
+                margin-bottom: 0%; // Xóa margin-bottom của thẻ cuối cùng
+              }
+              @include box-shadow-xs();
+              &__leftimg {
+                height: auto; 
+                width: 40%;
+                max-width: 270px;
+               
+                aspect-ratio: unset; // Loại bỏ aspect-ratio nếu cần
+                object-fit: cover;
+                flex-shrink: 0;
+              }
+              &__rightcontent {
+                &__title {
+                  @include typography(
+                    $primary-light,
+                    $font-weight-bold,
+                    $font-size-16,
+                    $line-height-percent-150
+                  );
+                  span {
+                    color: $secondary-1-default;
+                  }
+                }
+                &__boxtext {
+                  display: flex;
+                  flex-direction: column;
+                  align-items: flex-start;
+                  &__text {
+                    width: 100%;
+                    display: flex;
+                    flex-direction: row;
+                    gap: 2%;
+
+                    p {
+                      text-align: left;
+                      @include typography(
+                        $primary-default,
+                        $font-weight-medium,
+                        $font-size-14,
+                        $line-height-percent-150
+                      );
+                    }
+                  }
+                  &__link {
+                    width: 50%;
+                    text-align: left;
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    gap: 1%;
+                    span {
+                      width: 60%;
+                      @include media-breakpoint-down(xl) {
+                        width: 80%;
+                      }
+                      @include typography(
+                      $primary-default,
+                      $font-weight-medium,
+                      $font-size-14,
+                      $line-height-percent-150
+                    );
+                    }
+                  }
+                }
+              }
+            }
+            &__card2 {
+              @include media-breakpoint-down(xl) {
+                width: 80%;
+               
+                object-fit: cover;
+                object-position: center;
+              }
+              border: 2px solid $primary-default; // Định nghĩa viền chung
+              border-bottom: 4px solid $primary-default; // Làm viền dưới dày hơn
+              margin-bottom: 3%;
+              &:last-child {
+                margin-bottom: 0%; // Xóa margin-bottom của thẻ cuối cùng
+              }
+              &__leftimg{
+                height: 38vh;
+                object-fit: cover;
+                  object-position: center;
+                @include media-breakpoint-down(xxl) {
+                  height: 50vh;
+              
+                  object-fit: cover;
+                  object-position: center;
+                }
+              }
+            }
+          }
+         
+        }
+       
+      }
+    }
+    .carousel-control-prev {
+      left: -6%; /* Đẩy nút Prev ra xa hơn 10% so với carousel */
+      bottom: 20%;
+      width: 5%;
+      filter: invert(70%) sepia(78%) saturate(200%) hue-rotate(180deg);
+     
+      @include media-breakpoint-down(xl) {
+        left: -8vw;
+       
+      }
+      @include media-breakpoint-down(lg) {
+        left: 2vw;
+       top: 18vh;
+      }
+      @include media-breakpoint-down(md) {
+        left: 4vw;
+       top: 28vh;
+      }
+      @include media-breakpoint-down(sm) {
+        left: -8vw;
+        top: 38vh;
+      }
+    }
+  
+    .carousel-control-next {
+      width: 5%;
+      bottom: 20%;
+      right: -4%; /* Đẩy nút Next ra xa hơn 10% so với carousel */
+      filter: invert(70%) sepia(78%) saturate(200%) hue-rotate(180deg);
+      @include media-breakpoint-down(xl) {
+        right: -2vw;
+       
+      }
+      @include media-breakpoint-down(lg) {
+        left: 66vw;
+       top: 18vh;
+      }
+      @include media-breakpoint-down(md) {
+        left: 78vw;
+       top: 28vh;
+      }
+  
+      @include media-breakpoint-down(sm) {
+        left: 66vw;
+       top: 38vh;
+      }
+    }
+    /* Đẩy indicators xuống dưới carousel */
+    .carousel-indicators {
+      position:absolute;
+      top: 106%; /* Đẩy indicators xuống dưới 5% */
+      @include media-breakpoint-down(xxl) {
+        top: 104%;
+      }
+      @include media-breakpoint-down(xl) {
+        top: 106%;
+       
+      }
+      @include media-breakpoint-down(lg) {
+        top: 107%;
+      }
+  
+      @include media-breakpoint-down(md) {
+        top: 107%;
+      }
+      @include media-breakpoint-down(sm) {
+        top: 102%;
+      }
+    }
+  
+    /* Đổi màu indicators */
+    .carousel-indicators button {
+      background-color: $secondary-gradient-3;
+      width: 12px; /* Kích thước vòng tròn */
+      height: 12px;
+      border-radius: 50%; /* Làm tròn indicators */
+      opacity: 0.7; /* Giảm độ trong suốt */
+    }
+  
+    /* Khi indicator được chọn */
+    .carousel-indicators .active {
+      background-color: $secondary-1-dark;
+      opacity: 1;
+    }
+  }
+  
+}

@@ -1,0 +1,153 @@
+// import font Be vietnam pro từ google font
+
+@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap');
+
+
+// COLOR
+//primary color
+$primary-default:#062844;
+$primary-dark:#05243d;
+$primary-darker:#031626;
+$primary-darkest:#020f1a;
+$primary-light:#1b2730;
+$primary-lighter:#96a4af;
+$primary-lightest:#cad1d7;
+//secondary - 1 color
+$secondary-1-default:#A99364;
+$secondary-1-dark:#9F895A;
+$secondary-1-darker:#856F3F;
+$secondary-1-darkest:#5F523E;
+$secondary-1-light:#C0AA79;
+$secondary-1-lighter:#F0E8D4;
+$secondary-1-lightest:#e5ded0;
+//secondary - 2 color
+$secondary-2:#FFBB1C;
+//accent color
+$accent-default:#EE0004;
+$accent-dark:#d60003;
+$accent-darker:#950002;
+$accent-darkest:#4a0001;
+$accent-light:#f13336;
+$accent-lighter:#f57072;
+$accent-lightest:#fbc5c6;
+//surface color
+$layer-1:#FAFBFC;
+$layer-2:#F2F2F7;
+$layer-3:#DFE5EB;
+$layer-4:#C3C7D4;
+//gray scale color
+$grayscale-default:#9AA4AC;
+$grayscale-dark:#788691;
+$grayscale-darker:#535D65;
+$grayscale-darkest:#373E43;
+$grayscale-light:#B0B8BF;
+$grayscale-lighter:#D2D6DA;
+$grayscale-lightest:#F4F5F6;
+//background color
+$background-default:#F3F3F3;
+$background-dark:#7C828B;
+$background-darker:#3F3F3F;
+$background-light:#C9CCD4;
+$background-lighter:#EEF1F0;
+//secondary - gradient
+$secondary-gradient-1: linear-gradient(180deg, $primary-default 23%, $primary-light 51%, $primary-default 89%);
+$secondary-gradient-2: linear-gradient(180deg, $primary-default 22.6%, #697E8E 50.6%, $primary-default 88.6%);
+$secondary-gradient-3: linear-gradient(180deg, $accent-dark 17.9%, $accent-lighter 52.4%, $accent-dark 77.9%);
+$secondary-gradient-4: linear-gradient(180deg, $secondary-1-lighter 17.9%, $secondary-1-darker 52.4%, $secondary-1-dark 77.9%,);
+
+
+
+
+//------------------------------
+// TYPOGRAPHY
+// day la cac class lay cua css của google font
+
+// .be-vietnam-pro-regular {
+//     font-family: $font-family;
+//     font-weight: $font-weight;
+//     font-style: $font-style;
+//   }
+  
+
+// $font-family-be-vietnam-pro-regular: {
+//     font-family: "Be Vietnam Pro", serif;
+//     font-weight: 400;
+//     font-style: normal;
+//   };
+  
+// $font-family-be-vietnam-pro-medium: {
+//     font-family: "Be Vietnam Pro", serif;
+//     font-weight: 500;
+//     font-style: normal;
+//   };
+  
+//   $font-family-be-vietnam-pro-semibold :{
+//     font-family: "Be Vietnam Pro", serif;
+//     font-weight: 600;
+//     font-style: normal;
+//   };
+  
+//   $font-family-be-vietnam-pro-bold: {
+//     font-family: "Be Vietnam Pro", serif;
+//     font-weight: 700;
+//     font-style: normal;
+//   };
+// font family
+$font-family-default: 'Be Vietnam Pro, serif';
+//font style
+$font-style-default: normal;
+//font weight
+$font-weight-regular: 400;
+$font-weight-medium: 500;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+//font size doi tu px trong thiet ke sang rem  giả sử 1rem = 16px
+$font-size-40: 2.5rem;  // 40px / 16 = 2.5rem
+$font-size-32: 2rem;    // 32px / 16 = 2rem
+$font-size-28: 1.75rem; // 28px / 16 = 1.75rem
+$font-size-24: 1.5rem;  // 24px / 16 = 1.5rem
+$font-size-20: 1.25rem; // 20px / 16 = 1.25rem
+$font-size-18: 1.125rem;// 18px / 16 = 1.125rem
+$font-size-16: 1rem;    // 16px / 16 = 1rem
+$font-size-14: 0.875rem;// 14px / 16 = 0.875rem
+$font-size-12: 0.75rem; // 12px / 16 = 0.75rem
+$font-size-10: 0.625rem;// 10px / 16 = 0.625rem
+
+
+//------------------------------
+// SPACING
+//line height
+$line-height-percent-110:110%;
+$line-height-percent-120:120%;
+$line-height-percent-130:130%;
+$line-height-percent-150:150%;
+//------------------------------
+// BORDER RADIUS
+//radius
+$radius-0:0px;
+$radius-2:2px;
+$radius-4:4px;
+$radius-8:8px;
+$radius-16:16px;
+$radius-32:32px;
+$radius-64:64px;
+$radius-80:80px;
+$radius-999:999px;
+//------------------------------
+// EFFECTS
+//shadow
+$shadow-xs: 0px 4px 4px 0px rgba(0, 0, 0, 0.25), 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+
+//RESPONSIVE
+//breakpoints
+// Styles mặc định của Bootstrap là cho Desktop khi chưa responsive
+$bootstrap-grid-breakpoints: (
+  xs: 0px,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  xxl: 1400px
+);
+
+
