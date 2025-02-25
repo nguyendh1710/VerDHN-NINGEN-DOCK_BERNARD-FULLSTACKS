@@ -6,7 +6,7 @@
   "dev": "npx nodemon index.js",
  
    
-  "start": "node backend/server.js"
+  "start": "node backend/index.js"
  
   },
  
