@@ -8,10 +8,10 @@ const cors = require("cors");
 const rateLimit = require("express-rate-limit");
 // ✅ Khởi tạo server
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5000; // Dùng PORT của Vercel hoặc 5000 khi chạy local
 
 // ✅ Middleware
-app.use(cors());
+app.use(cors({ origin: "*" }));// Cho phép tất cả domain gọi API
 app.use(express.json()); // Thay thế bodyParser.json()
 // Tạo middleware giới hạn số lần gửi form => chống spam bot
 const formLimiter = async (req, res, next) => {
@@ -121,7 +121,9 @@ app.get("/api/health", (req, res) => {
 });
 
 // ✅ Khởi động server
-app.listen(process.env.PORT ||PORT); // Dùng port do Vercel cấpPORT, () => console.log(`🚀 Server running on http://localhost:${PORT}`));
+app.listen(PORT, () => {
+  console.log(`🚀 Server running on http://localhost:${PORT}`);
+});
 
 // ✅ Route kiểm tra Backend đang chạy
 app.get("/", (req, res) => {
