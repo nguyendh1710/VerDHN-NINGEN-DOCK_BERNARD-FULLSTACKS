@@ -6,7 +6,7 @@ const mongoose = require("mongoose");
 const express = require("express");
 const cors = require("cors");
 const rateLimit = require("express-rate-limit");
-
+app.use(express.json()); // khởi tạo app Thay thế bodyParser.json()
 
 
 //------------------------- Tạo các  middleware
@@ -20,7 +20,7 @@ app.use(cors({
   methods: "GET,POST,PUT,DELETE",
   allowedHeaders: "Content-Type,Authorization"
 }));
-app.use(express.json()); // Thay thế bodyParser.json()
+
 
 
 //middleware giới hạn số lần gửi form => chống spam bot
