@@ -23,13 +23,7 @@ const allowedOrigins = [
 
 // ✅ Chỉ cho phép frontend từ Vercel gọi API (bảo mật hơn)
 app.use(cors({
-  origin: function (origin, callback) {
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error("CORS policy doesn't allow this origin!"));
-    }
-  },
+  origin: '*',
   methods: "GET,POST,PUT,DELETE",
   allowedHeaders: "Content-Type,Authorization"
 }));
