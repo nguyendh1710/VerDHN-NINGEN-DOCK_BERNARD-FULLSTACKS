@@ -1,9 +1,15 @@
 {
   "version": 2,
   "builds": [
-    { "src": "backend/index.js", "use": "@vercel/node" }
+    {
+      "src": "backend/index.js",  // Đảm bảo đường dẫn chính xác đến file server.js
+      "use": "@vercel/node"  // Sử dụng Vercel Node.js runtime
+    }
   ],
   "routes": [
-    { "src": "/(.*)", "dest": "/backend/index.js" }
+    {
+      "src": "/api/(.*)",   // Chuyển hướng tất cả các yêu cầu tới API đến server.js
+      "dest": "backend/index.js"
+    }
   ]
 }
