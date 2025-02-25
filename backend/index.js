@@ -121,7 +121,7 @@ app.get("/api/health", (req, res) => {
 });
 
 // ✅ Khởi động server
-app.listen(PORT, () => console.log(`🚀 Server running on http://localhost:${PORT}`));
+app.listen(process.env.PORT ||PORT); // Dùng port do Vercel cấpPORT, () => console.log(`🚀 Server running on http://localhost:${PORT}`));
 
 // ✅ Route kiểm tra Backend đang chạy
 app.get("/", (req, res) => {
