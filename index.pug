@@ -1,0 +1,18 @@
+block mixins
+  include ./views/mixins
+  
+html
+  head
+    //-  lên mạng tìm trang html to pug để covert code lấy được từ google font, xong copy vào đây      
+    link(rel='preconnect' href='https://fonts.googleapis.com')
+    link(rel='preconnect' href='https://fonts.gstatic.com' crossorigin='')
+    link(href='https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap' rel='stylesheet')
+    //- bootstrap 5
+    link(rel='stylesheet', href='https://stackpath.bootstrapcdn.com/bootstrap/5.0.0/css/bootstrap.min.css')
+
+    //- file css cua mình
+    link(rel="stylesheet", href="./css/app.css")
+    body
+      include ./views/header/header
+    //- bootstrap 5
+    script(src='https://stackpath.bootstrapcdn.com/bootstrap/5.0.0/js/bootstrap.bundle.min.js')

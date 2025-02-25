@@ -1,0 +1,139 @@
+.wrapper {
+  max-width: 1440;
+  margin: 0 auto;
+}
+
+body .be-vietnam-pro-regular {
+  font-family: "Be Vietnam Pro", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+body .be-vietnam-pro-medium {
+  font-family: "Be Vietnam Pro", serif;
+  font-weight: 500;
+  font-style: normal;
+}
+body .be-vietnam-pro-semibold {
+  font-family: "Be Vietnam Pro", serif;
+  font-weight: 600;
+  font-style: normal;
+}
+body .be-vietnam-pro-bold {
+  font-family: "Be Vietnam Pro", serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+html {
+  line-height: 1.5;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+input,
+textarea,
+select,
+button {
+  outline: none;
+  font: inherit;
+}
+
+input {
+  line-height: normal;
+}
+
+label,
+button {
+  cursor: pointer;
+  -webkit-user-select: none !important;
+     -moz-user-select: none !important;
+          user-select: none !important;
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+  -webkit-user-select: none !important;
+     -moz-user-select: none !important;
+          user-select: none !important;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+
+/* Mobile: width < 740px */
+@media only screen and (max-width: 46.1875em) {
+  input[type=color],
+  input[type=date],
+  input[type=datetime],
+  input[type=datetime-local],
+  input[type=email],
+  input[type=month],
+  input[type=number],
+  input[type=password],
+  input[type=search],
+  input[type=tel],
+  input[type=text],
+  input[type=time],
+  input[type=url],
+  input[type=week],
+  select:focus,
+  textarea {
+    font-size: 16px;
+  }
+}
+.header {
+  display: flex;
+  width: 1170px;
+  padding: var(--Number-0-px, 0px) var(--Section-Padding-R---L, 24px);
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: var(--Number-32-px, 32px);
+}
+.header .navigation .box__logo {
+  display: flex;
+  width: 253px;
+  flex-direction: column;
+  align-items: center;
+  gap: 23px;
+}
+.header .navigation .box__logo .box__logo-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.header .navigation .box__logo .box__logo-item img {
+  width: 155px;
+  height: 42px;
+}/*# sourceMappingURL=app.css.map */
