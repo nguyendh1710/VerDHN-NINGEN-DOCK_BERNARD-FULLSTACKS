@@ -96,5 +96,6 @@ app.get("/", (req, res) => {
 });
 
 // ✅ Khởi động server
-module.exports = app;
-
+app.listen(PORT, () => {
+  console.log(`🚀 Server running on http://localhost:${PORT}`);
+});
