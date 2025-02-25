@@ -3,9 +3,7 @@
   "scripts": {
  
    
-  "dev": "npx nodemon index.js",
- 
-   
+   "dev": "npx nodemon backend/index.js",
   "start": "node backend/index.js"
  
   },
