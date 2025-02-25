@@ -10,24 +10,27 @@ const cors = require("cors");
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// ✅ Đặt middleware CORS trước tất cả middleware khác
-app.use(
-  cors({
-    origin: "https://ver-dhn-ningen-dock-bernard-fullstacks-1do4.vercel.app",
-    methods: "GET,POST,PUT,DELETE",
-    allowedHeaders: "Content-Type,Authorization",
-    credentials: true, // Cho phép gửi cookies (nếu cần)
-  })
-);
+// ✅ Cấu hình CORS đúng cách
+const corsOptions = {
+  origin: "https://ver-dhn-ningen-dock-bernard-fullstacks-1do4.vercel.app",
+  methods: "GET,POST,PUT,DELETE,OPTIONS",
+  allowedHeaders: "Content-Type,Authorization",
+  credentials: true,
+};
+app.use(cors(corsOptions));
+
+// ✅ Xử lý preflight request để tránh lỗi CORS
+app.options("*", cors(corsOptions));
 
 // ✅ Middleware xử lý JSON
 app.use(express.json());
 
-// ✅ Middleware custom để sửa lỗi CORS trên Vercel
+// ✅ Middleware custom thêm headers CORS nếu cần
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "https://ver-dhn-ningen-dock-bernard-fullstacks-1do4.vercel.app");
-  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
+  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
   res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  res.header("Access-Control-Allow-Credentials", "true"); // ✅ Quan trọng nếu gửi cookies
   next();
 });
 
@@ -84,16 +87,6 @@ app.post("/api/informations", async (req, res) => {
       return res.status(400).json({ message: "Email hoặc số điện thoại đã tồn tại" });
     }
     res.status(500).json({ message: "Lỗi server", error });
-  }
-});
-
-// ✅ Route kiểm tra kết nối MongoDB
-app.get("/api/test-mongo", async (req, res) => {
-  try {
-    const isConnected = mongoose.connection.readyState === 1;
-    res.json({ success: isConnected, message: isConnected ? "MongoDB Connected" : "MongoDB Not Connected" });
-  } catch (error) {
-    res.status(500).json({ success: false, error: error.message });
   }
 });
 
